@@ -7,8 +7,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.dicoding.habitapp.R
+import com.dicoding.habitapp.utils.DarkMode
+import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -48,6 +51,13 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
             //TODO 11 : Update theme based on value in ListPreference
+
+            val prefTheme = findPreference<ListPreference>(getString(R.string.pref_key_dark))
+            prefTheme?.setOnPreferenceChangeListener { _, newValue ->
+                val mode = DarkMode.valueOf((newValue as String).uppercase(Locale.US)).value
+                updateTheme(mode)
+                true
+            }
         }
 
         private fun updateTheme(mode: Int): Boolean {
