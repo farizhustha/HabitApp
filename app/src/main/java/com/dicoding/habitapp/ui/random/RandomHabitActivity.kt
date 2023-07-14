@@ -37,13 +37,19 @@ class RandomHabitActivity : AppCompatActivity() {
         )[RandomHabitViewModel::class.java]
 
         viewModel.priorityLevelHigh.observe(this) {
-            adapter.submitData(RandomHabitAdapter.PageType.HIGH, it)
+            if (it != null) {
+                adapter.submitData(RandomHabitAdapter.PageType.HIGH, it)
+            }
         }
         viewModel.priorityLevelMedium.observe(this) {
-            adapter.submitData(RandomHabitAdapter.PageType.MEDIUM, it)
+            if (it != null) {
+                adapter.submitData(RandomHabitAdapter.PageType.MEDIUM, it)
+            }
         }
         viewModel.priorityLevelLow.observe(this) {
-            adapter.submitData(RandomHabitAdapter.PageType.LOW, it)
+            if (it != null) {
+                adapter.submitData(RandomHabitAdapter.PageType.LOW, it)
+            }
         }
 
     }
